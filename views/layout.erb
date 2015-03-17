@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My App</title>
+  <link rel="stylesheet" href="/stylesheets/app.css"/>
+
+  <%= js :modernizr %>
+</head>
+<body background="<%= @background_image %>">
+    <p><a href='/'>Home</a></p>
+    <h1 style="color: #9900CC">Welcome to Jasper's fashion show</h1>
+    <% if @message %>
+      <h1><%= @message %></h1>
+    <% end %>
+    <p> The current user is <%= @user %> </p>
+    <p> The current environment is <%= @environment %></p>
+    <% if @weight %>
+      <p> Last guess for Jasper's weight: <%= @weight %> lbs </p>
+    <% end %>
+  <%= yield %>
+
+  <%= js :libs %>
+  <%= js :application %>
+</body>
+</html>
