@@ -6,11 +6,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My App</title>
-  <link rel="stylesheet" href="/stylesheets/app.css"/>
+  <link rel="stylesheet" href="css/app.css"/>
 
   <%= js :modernizr %>
 </head>
-<body>
+<body background="<%= @background_image %>">
     <p><a href='/'>Home</a></p>
     <h1 style="color: #9900CC">Welcome to Jasper's fashion show</h1>
     <% if @message %>
