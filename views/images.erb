@@ -1,7 +1,9 @@
-<% @images.each_with_index do |image, index| %>
-  <% next if index == 0 %>
-  <h3><%= image[:title] %></h3>
-  <a href="/images/<%=index%>">
-    <img src="<%= image[:url] %>" width=50%></img>
-  </a>
-<% end %>
+<ul class="small-block-grid-3">
+  <% @images.each_with_index do |image, index| %>
+    <% next if index == 0 %>
+    <h3><%= image[:title] %></h3>
+    <li>
+        <a href="/images/<%=index%>"><img src="<%= image[:url] %>" width=50%></img></a>
+    </li>
+  <% end %>
+</ul>

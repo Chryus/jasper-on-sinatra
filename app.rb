@@ -88,7 +88,6 @@ class App < Sinatra::Base
   end
 
   get '/' do
-    binding.pry
     erb :home, layout: true
   end
 
