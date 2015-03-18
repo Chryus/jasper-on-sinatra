@@ -14,17 +14,6 @@ JASPER = [
 
 class App < Sinatra::Base
 
-  configure do
-    Compass.configuration do |config|
-      config.project_path = File.dirname(__FILE__)
-      config.sass_dir = 'views'
-    end
-
-    set :haml, { :format => :html5 }
-    set :sass, Compass.sass_engine_options
-    set :scss, Compass.sass_engine_options
-  end
-
   set :root, File.dirname(__FILE__) # You must set app root
 
   register Sinatra::AssetPack
@@ -33,7 +22,7 @@ class App < Sinatra::Base
 
   assets do
     serve '/js', from: 'js'
-    serve '/css', :from => 'css'
+    serve '/css', :from => 'public/stylesheets'
     serve '/bower_components', from: 'bower_components'
 
     js :modernizr, [
