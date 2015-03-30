@@ -4,6 +4,7 @@ require "awesome_print"
 require "json"
 require 'sinatra/assetpack'
 require 'compass'
+require 'sinatra/prawn'
 
 JASPER = [
   { title: "background-image", url: "/images/0.jpg"},
@@ -17,6 +18,8 @@ class App < Sinatra::Base
   set :root, File.dirname(__FILE__) # You must set app root
 
   register Sinatra::AssetPack
+  register Sinatra::Prawn
+
 
   enable :sessions, :logging
 
@@ -55,6 +58,15 @@ class App < Sinatra::Base
 
   after do
     logger.info "<== Leaving request"
+  end
+
+  get '/jasper.pdf' do
+    attachment
+    content_type 'application/pdf'
+
+    pdf = Prawn::Document.new
+    pdf.text "Jasper is a sweet sweet soul"
+    pdf.render
   end
 
   get '/images' do
