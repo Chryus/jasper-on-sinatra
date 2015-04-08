@@ -7,6 +7,10 @@ gem "compass", "~> 1.0"
 gem "thin"
 gem "fog"
 gem  "sbfaulkner-sinatra-prawn"
+gem "pg", platforms: :ruby
+gem "sinatra-contrib", github: "sinatra/sinatra-contrib"
+gem "sequel_pg", platforms: :ruby
+gem "sequel"
 
 group :development do
   gem 'pry-byebug'
