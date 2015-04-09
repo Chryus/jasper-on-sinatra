@@ -1,9 +1,9 @@
 development:
-  db_url: postgres://chryus:havana22@localhost/jasper_development
+  db_url: postgres://chryus:havana22@localhost/jasper-development
 
 test:
-  db_url: postgres://chryus:havana22@localhost/jasper_test
+  db_url: postgres://chryus:havana22@localhost/jasper-test
 
 production:
-  db_url: postgres://chryus:havana22@localhost/jasper_prouduction
+  db_url: postgres://chryus:havana22@localhost/jasper-prouduction
   max_connections: 25

@@ -68,6 +68,13 @@ class App < Sinatra::Base
     pdf.render
   end
 
+  namespace '/images' do
+    get do # matches '/images'
+      @images = Image.all
+      erb :images, layout: true
+    end
+  end
+
   get '/images' do
     @images = JASPER
     erb :images, layout: true
