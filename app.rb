@@ -1,16 +1,21 @@
-require "sinatra"
-require "pry-byebug"
-require "awesome_print"
-require "json"
+require 'sinatra'
+require 'sequel'
+require 'pry-byebug'
+require 'awesome_print'
+require 'json'
 require 'sinatra/assetpack'
+require 'sinatra/asset_pipeline'
 require 'compass'
 require 'sinatra/prawn'
+require 'sinatra/contrib'
+require './config/initializers/sequel'
+
 
 JASPER = [
-  { title: "background-image", url: "/images/0.jpg"},
-  { title: "boxes", url: "/images/1.jpg" },
-  { title: "mint", url: "/images/2.jpg" },
-  { title: "sun", url: "/images/3.jpg" }
+  { title: 'background-image', url: '/images/0.jpg'},
+  { title: 'boxes', url: '/images/1.jpg' },
+  { title: 'mint', url: '/images/2.jpg' },
+  { title: 'sun', url: '/images/3.jpg' }
 ]
 
 class App < Sinatra::Base
@@ -45,18 +50,18 @@ class App < Sinatra::Base
   end
 
   before do
-    @background_image = JASPER.map { |hash| hash[:url] if hash[:title] == "background-image" }.compact.first
-    @user = "Chris"
+    @background_image = JASPER.map { |hash| hash[:url] if hash[:title] == 'background-image' }.compact.first
+    @user = 'Chris'
     @weight = session[:weight]
     @environment = settings.environment
   end
 
   before /images/ do
-    @message = "Jasper is pretty"
+    @message = 'Jasper is pretty'
   end
 
   after do
-    logger.info "<== Leaving request"
+    logger.info '<== Leaving request'
   end
 
   get '/jasper.pdf' do
@@ -64,7 +69,7 @@ class App < Sinatra::Base
     content_type 'application/pdf'
 
     pdf = Prawn::Document.new
-    pdf.text "Jasper is a sweet sweet soul"
+    pdf.text 'Jasper is a sweet sweet soul'
     pdf.render
   end
 
@@ -84,22 +89,22 @@ class App < Sinatra::Base
     @image = JASPER[index.to_i]
 
     attachment @image[:title]
-    send_file "images/#{index}.jpg" 
+    send_file 'images/#{index}.jpg' 
   end
 
   get '/images/:index.?:format?' do |index, format|
     @index = index.to_i
     @image = JASPER[@index]
-    if format == "jpg"
+    if format == 'jpg'
       content_type :jpg
-      send_file "images/#{@index}.jpg"
+      send_file 'images/#{@index}.jpg'
     else
-      erb :"/images/show", layout: true
+      erb :'/images/show', layout: true
     end
   end
 
   get '/sessions/new' do
-    erb :"/sessions/new", layout: true
+    erb :'/sessions/new', layout: true
   end
 
   post '/sessions' do
@@ -112,12 +117,12 @@ class App < Sinatra::Base
   end
 
   post '/' do
-    "Hello World via POST"
-    params["wew"]
+    'Hello World via POST'
+    params['wew']
   end
 
   put '/' do
-    "Jasper via PUT"
+    'Jasper via PUT'
   end
 
   delete '/' do
@@ -125,11 +130,11 @@ class App < Sinatra::Base
   end
 
   # get '/:first_name/?:last_name?' do |first, last|
-  #   "Hello #{first} #{last}"
+  #   'Hello #{first} #{last}'
   # end
 
   not_found do
-    erb :"404", layout: false
+    erb :'404', layout: false
   end
 
 end

@@ -1,6 +1,6 @@
-source "http://gems.github.com"
+source "https://rubygems.org"
 
-gem "sinatra", github: "sinatra/sinatra"
+gem "sinatra"#, github: "sinatra/sinatra"
 gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
 gem "sass", "~> 3.4.0"
 gem "compass", "~> 1.0"

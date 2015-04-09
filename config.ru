@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'bundler'
 
-Bundler.require
-
 require "./app"
+
+Bundler.require
 
 run App
