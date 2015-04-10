@@ -78,6 +78,15 @@ class App < Sinatra::Base
       @images = Image.all
       erb ":/images/index", layout: true
     end
+
+    get "/:id" do |id|
+      @image = Image.find(id)
+      erb :"images/show"
+    end
+
+    post do
+      @image = Image.create params[:image]
+    end
   end
 
   get '/images' do
