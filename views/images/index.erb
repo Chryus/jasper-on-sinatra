@@ -1,22 +1,35 @@
 <h1>Images<h1>
 
 <% if @images.count < 2 %>
-  <h4>You have no images<h4>
+	<h4>You have no images<h4>
 <% end %>
 
 <% @images.each_with_index do |image, index| %>
-  <% debugger %>
-  <% next if index == 0 %>
-  <h2>
-    <a href="/images/<%= image.id %>"><%= image[:title] %></a>
-  </h2>
-  <p>
-    <img src="<%= image[:url] %>" width="40"/>
-  </p>
-  <blockquote>
-    <%= image[:description] %>
-  </blockquote>
+	<% debugger %>
+	<% next if index == 0 %>
+	<h2>
+		<a href="/images/<%= image.id %>"><%= image[:title] %></a>
+	</h2>
+	<p>
+		<img src="<%= image[:url] %>" width="40"/>
+	</p>
+	<blockquote>
+		<%= image[:description] %>
+	</blockquote>
 <% end %>
 
 <h2>Store a new image</h2>
  
+<form class="row" action="/images" method="post">
+	<p class="six columns">
+		<label>URL</label>
+		<input type="url" placeholder="Enter a URL" name="image[url]"></input>
+	</p>
+	<p class="twelve columns">
+		<label>Description</label>
+		<textarea placeholder="Enter a quick description" rows="3" name=image["description"]></textarea>
+	</p>
+	<p class="twelve columns">
+		<input class="button" type="submit" value="Upload an image"></input>
+	</p>
+</form>
