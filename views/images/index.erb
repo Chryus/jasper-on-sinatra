@@ -5,11 +5,18 @@
 <% end %>
 
 <% @images.each_with_index do |image, index| %>
+  <% debugger %>
   <% next if index == 0 %>
-  <h2><a href="images/#{image.id}=#{image[:title]"</a></h3>
-  <p><img src=<%=image[:url]%> width=40/></p>
-  <li>
-      <a href="/images/<%=index%>"><img src="<%= image[:url] %>" width=50%></img></a>
-  </li>
+  <h2>
+    <a href="/images/<%= image.id %>"><%= image[:title] %></a>
+  </h2>
+  <p>
+    <img src="<%= image[:url] %>" width="40"/>
+  </p>
+  <blockquote>
+    <%= image[:description] %>
+  </blockquote>
 <% end %>
-</ul>
+
+<h2>Store a new image</h2>
+ 

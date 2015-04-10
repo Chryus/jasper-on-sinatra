@@ -76,7 +76,7 @@ class App < Sinatra::Base
   namespace '/images' do
     get do # matches '/images'
       @images = Image.all
-      erb :images, layout: true
+      erb ":/images/index", layout: true
     end
   end
 
