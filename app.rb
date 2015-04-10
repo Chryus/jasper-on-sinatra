@@ -9,6 +9,7 @@ require 'compass'
 require 'sinatra/prawn'
 require 'sinatra/contrib'
 require './config/initializers/sequel'
+require './models/image'
 
 
 JASPER = [
