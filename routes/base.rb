@@ -1,8 +1,15 @@
 require "sinatra/base"
+require 'pry-byebug'
+require 'awesome_print'
 require "sass"
 require "sinatra/content_for"
-require "./config/initializers/sequel"
-require "pry-byebug"
+require 'sinatra/contrib'
+require 'json'
+require 'sinatra/assetpack'
+require 'sinatra/asset_pipeline'
+require 'compass'
+require 'sinatra/prawn'
+require './config/initializers/sequel'
 
 Dir["./models/*.rb"].each { |model| require model }
 Dir["./helpers/*.rb"].each { |helper| require helper }
@@ -12,7 +19,7 @@ module JasperOnSinatra
     module Base < Sinatra::Base
       configure do
         enable :method_override
-        enable :static, :logging
+        enable :static, :logging, :sessions
       end
 
       before do
@@ -28,10 +35,36 @@ module JasperOnSinatra
       set :assets_css_compressor, :sass
       set :assets_js_compressor, :uglifier
       register Sinatra::AssetPipeline
+      register Sinatra::AssetPack
+      register Sinatra::Namespace
 
       set :erb, format: :html5
 
       helpers Sinatra::ContentFor, FlashHelper, TextHelper, DateHelper, NamedRoutes
+
+
+      assets do
+        serve '/js', from: 'js'
+        serve '/css', :from => 'assets/stylesheets'
+        serve '/bower_components', from: 'bower_components'
+
+        js :modernizr, [
+          '/bower_components/modernizr/modernizr.js',
+        ]
+
+        js :libs, [
+          '/bower_components/jquery/dist/jquery.js',
+          '/bower_components/foundation/js/foundation.js',
+          '/bower_components/foundation/js/foundation/foundation.magellan.js'
+        ]
+
+        js :application, [
+          '/js/app.js'
+        ]
+
+        js_compression :jsmin
+      end
+      
     end
   end
 end

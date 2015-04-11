@@ -1,16 +1,4 @@
 require 'sinatra'
-require 'sequel'
-require 'pry-byebug'
-require 'awesome_print'
-require 'json'
-require 'sinatra/assetpack'
-require 'sinatra/asset_pipeline'
-require 'compass'
-require 'sinatra/prawn'
-require 'sinatra/contrib'
-require './config/initializers/sequel'
-require './models/image'
-
 
 JASPER = [
   { title: 'background-image', url: '/images/0.jpg'},
@@ -19,132 +7,107 @@ JASPER = [
   { title: 'sun', url: '/images/3.jpg' }
 ]
 
-class App < Sinatra::Base
+module JasperOnSinatra
+  class App < Sinatra::Application
+    set :title, "Jasper on Sinatra"
 
-  set :root, File.dirname(__FILE__) # You must set app root
+    use Routes::Images
 
-  register Sinatra::AssetPack
-  register Sinatra::Namespace
-
-  enable :sessions, :logging
-
-  assets do
-    serve '/js', from: 'js'
-    serve '/css', :from => 'public/stylesheets'
-    serve '/bower_components', from: 'bower_components'
-
-    js :modernizr, [
-      '/bower_components/modernizr/modernizr.js',
-    ]
-
-    js :libs, [
-      '/bower_components/jquery/dist/jquery.js',
-      '/bower_components/foundation/js/foundation.js',
-      '/bower_components/foundation/js/foundation/foundation.magellan.js'
-    ]
-
-    js :application, [
-      '/js/app.js'
-    ]
-
-    js_compression :jsmin
-  end
-
-  before do
-    @background_image = JASPER.map { |hash| hash[:url] if hash[:title] == 'background-image' }.compact.first
-    @user = 'Chris'
-    @weight = session[:weight]
-    @environment = settings.environment
-  end
-
-  before /images/ do
-    @message = 'Jasper is pretty'
-  end
-
-  after do
-    logger.info '<== Leaving request'
-  end
-
-  get '/jasper.pdf' do
-    attachment
-    content_type 'application/pdf'
-
-    pdf = Prawn::Document.new
-    pdf.text 'Jasper is a sweet sweet soul'
-    pdf.render
-  end
-
-  namespace '/images' do
-    get do # matches '/images'
-      @images = Image.all
-      erb ":/images/index", layout: true
+    before do
+      @background_image = JASPER.map { |hash| hash[:url] if hash[:title] == 'background-image' }.compact.first
+      @user = 'Chris'
+      @weight = session[:weight]
+      @environment = settings.environment
     end
 
-    get "/:id" do |id|
-      @image = Image.find(id)
-      erb :"images/show"
+    before /images/ do
+      @message = 'Jasper is pretty'
     end
 
-    post do
-      @image = Image.create params[:image]
+    after do
+      logger.info '<== Leaving request'
+    end
+
+    get '/jasper.pdf' do
+      attachment
+      content_type 'application/pdf'
+
+      pdf = Prawn::Document.new
+      pdf.text 'Jasper is a sweet sweet soul'
+      pdf.render
+    end
+
+    namespace '/images' do
+      get do # matches '/images'
+        @images = Image.all
+        erb ":/images/index", layout: true
+      end
+
+      get "/:id" do |id|
+        @image = Image.find(id)
+        erb :"images/show"
+      end
+
+      post do
+        @image = Image.create params[:image]
+      end
+    end
+
+    get '/images' do
+      @images = JASPER
+      erb :images, layout: true
+    end
+
+    get '/images/:index/download' do |index|
+      @image = JASPER[index.to_i]
+
+      attachment @image[:title]
+      send_file 'images/#{index}.jpg' 
+    end
+
+    get '/images/:index.?:format?' do |index, format|
+      @index = index.to_i
+      @image = JASPER[@index]
+      if format == 'jpg'
+        content_type :jpg
+        send_file 'images/#{@index}.jpg'
+      else
+        erb :'/images/show', layout: true
+      end
+    end
+
+    get '/sessions/new' do
+      erb :'/sessions/new', layout: true
+    end
+
+    post '/sessions' do
+      session[:weight] = params[:weight]
+      redirect '/images'
+    end
+
+    get '/' do
+      erb :home, layout: true
+    end
+
+    post '/' do
+      'Hello World via POST'
+      params['wew']
+    end
+
+    put '/' do
+      'Jasper via PUT'
+    end
+
+    delete '/' do
+      "Jasper via DELETE #{params['wew']}"
+    end
+
+    # get '/:first_name/?:last_name?' do |first, last|
+    #   'Hello #{first} #{last}'
+    # end
+
+    not_found do
+      erb :'404', layout: false
     end
   end
-
-  get '/images' do
-    @images = JASPER
-    erb :images, layout: true
-  end
-
-  get '/images/:index/download' do |index|
-    @image = JASPER[index.to_i]
-
-    attachment @image[:title]
-    send_file 'images/#{index}.jpg' 
-  end
-
-  get '/images/:index.?:format?' do |index, format|
-    @index = index.to_i
-    @image = JASPER[@index]
-    if format == 'jpg'
-      content_type :jpg
-      send_file 'images/#{@index}.jpg'
-    else
-      erb :'/images/show', layout: true
-    end
-  end
-
-  get '/sessions/new' do
-    erb :'/sessions/new', layout: true
-  end
-
-  post '/sessions' do
-    session[:weight] = params[:weight]
-    redirect '/images'
-  end
-
-  get '/' do
-    erb :home, layout: true
-  end
-
-  post '/' do
-    'Hello World via POST'
-    params['wew']
-  end
-
-  put '/' do
-    'Jasper via PUT'
-  end
-
-  delete '/' do
-    "Jasper via DELETE #{params['wew']}"
-  end
-
-  # get '/:first_name/?:last_name?' do |first, last|
-  #   'Hello #{first} #{last}'
-  # end
-
-  not_found do
-    erb :'404', layout: false
-  end
-
 end
