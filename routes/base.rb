@@ -16,7 +16,7 @@ Dir["./helpers/*.rb"].each { |helper| require helper }
 
 module JasperOnSinatra
   module Routes
-    module Base < Sinatra::Base
+    class Base < Sinatra::Base
       configure do
         enable :method_override
         enable :static, :logging, :sessions
@@ -42,7 +42,6 @@ module JasperOnSinatra
 
       helpers Sinatra::ContentFor, FlashHelper, TextHelper, DateHelper, NamedRoutes
 
-
       assets do
         serve '/js', from: 'js'
         serve '/css', :from => 'assets/stylesheets'
@@ -64,7 +63,6 @@ module JasperOnSinatra
 
         js_compression :jsmin
       end
-      
     end
   end
 end

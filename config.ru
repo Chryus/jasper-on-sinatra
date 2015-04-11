@@ -1,8 +1,10 @@
-require 'rubygems'
-require 'bundler'
-
 require "./app"
 
-Bundler.require
+app = Rack::Builder.new do
+  
+  map "/" do
+    run JasperOnSinatra::App
+  end
+end
 
-run App
+run app

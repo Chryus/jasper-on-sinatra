@@ -1,5 +1,7 @@
 require 'sinatra'
 
+require_relative "routes/images"
+
 JASPER = [
   { title: 'background-image', url: '/images/0.jpg'},
   { title: 'boxes', url: '/images/1.jpg' },
