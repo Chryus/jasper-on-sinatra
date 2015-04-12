@@ -5,6 +5,7 @@ gem "thin"
 gem "sinatra-contrib"
 gem "sass", "~> 3.4.0"
 gem "compass", "~> 1.0"
+gem "sinatra-asset-pipeline"
 gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
 gem "pg", platforms: :ruby
 gem "sequel_pg", platforms: :ruby

@@ -1,4 +1,8 @@
+APP_FILE  = 'app.rb'
+APP_CLASS = 'JasperOnSinatra'
+
 require "fileutils"
+require 'sinatra/assetpack/rake'
 require "sinatra/asset_pipeline/task.rb"
 
 require_relative "routes/base"
