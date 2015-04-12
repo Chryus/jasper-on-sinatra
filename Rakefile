@@ -4,6 +4,7 @@ APP_CLASS = 'JasperOnSinatra'
 require "fileutils"
 require 'sinatra/assetpack/rake'
 require "sinatra/asset_pipeline/task.rb"
+require "pry-byebug"
 
 require_relative "routes/base"
 require_relative "config/initializers/sequel"
@@ -32,10 +33,11 @@ end
 
 namespace :g do
   task :migration, :fname do |t, args|
+    binding.pry
     args.with_defaults(fname: "new_migration")
     Dir.chdir("db/migrations") do
       timestamp = Time.now.strftime("%Y%m%d%H%M")
-      filename = "#{timestamp}_#{arg[:fname]}.rb"
+      filename = "#{timestamp}_#{args[:fname]}.rb"
       File.open(filename, "w") do |f|
         f << <<-SCAFFOLD
 Sequel.migration do

@@ -8,6 +8,7 @@ require "./config/initializers/sequel"
 require "sinatra/content_for"
 require "json"
 require "sinatra/prawn"
+require "pry-byebug"
 
 Dir["./models/*.rb"].each { |model| require model }
 Dir["./helpers/*.rb"].each { |helper| require helper }
