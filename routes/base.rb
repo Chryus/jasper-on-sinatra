@@ -1,15 +1,14 @@
 require "sinatra/base"
-require 'pry-byebug'
-require 'awesome_print'
 require "sass"
+require 'compass'
+require 'sinatra/asset_pipeline'
+require 'sinatra/assetpack'
+require "rack-flash"
+require './config/initializers/sequel'
 require "sinatra/content_for"
 require 'sinatra/contrib'
 require 'json'
-require 'sinatra/assetpack'
-require 'sinatra/asset_pipeline'
-require 'compass'
 require 'sinatra/prawn'
-require './config/initializers/sequel'
 
 Dir["./models/*.rb"].each { |model| require model }
 Dir["./helpers/*.rb"].each { |helper| require helper }
@@ -22,10 +21,10 @@ module JasperOnSinatra
         enable :static, :logging, :sessions
       end
 
-      before do
-        pass if %w[login logout].include? request.path_info.split('/')[1]
-        redirect "/login" unless env["warden"].authenticated?
-      end
+      # before do
+      #   pass if %w[login logout].include? request.path_info.split('/')[1]
+      #   redirect "/login" unless env["warden"].authenticated?
+      # end
 
       set :root, File.realpath("..", __dir__)
       set :public_folder, File.realpath("../public", __dir__)
@@ -40,7 +39,7 @@ module JasperOnSinatra
 
       set :erb, format: :html5
 
-      helpers Sinatra::ContentFor, FlashHelper, TextHelper, DateHelper, NamedRoutes
+      helpers Sinatra::ContentFor
 
       assets do
         serve '/js', from: 'js'

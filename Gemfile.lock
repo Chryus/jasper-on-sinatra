@@ -1,15 +1,3 @@
-GIT
-  remote: git://github.com/sinatra/sinatra-contrib.git
-  revision: e80c8635c7350f9c200e718a536b2a11b6cc5afe
-  specs:
-    sinatra-contrib (1.4.2)
-      backports (>= 2.0)
-      multi_json
-      rack-protection
-      rack-test
-      sinatra (~> 1.4.0)
-      tilt (~> 1.3)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -155,6 +143,8 @@ GEM
       byebug (~> 4.0)
       pry (~> 0.10)
     rack (1.6.0)
+    rack-flash3 (1.0.5)
+      rack
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -178,6 +168,13 @@ GEM
       rack-test
       sinatra
       tilt (>= 1.3.0, < 2.0)
+    sinatra-contrib (1.4.2)
+      backports (>= 2.0)
+      multi_json
+      rack-protection
+      rack-test
+      sinatra (~> 1.4.0)
+      tilt (~> 1.3)
     slop (3.6.0)
     thin (1.6.3)
       daemons (~> 1.0, >= 1.0.9)
@@ -195,11 +192,12 @@ DEPENDENCIES
   fog
   pg
   pry-byebug
+  rack-flash3
   sass (~> 3.4.0)
   sbfaulkner-sinatra-prawn
   sequel
   sequel_pg
   sinatra
   sinatra-assetpack
-  sinatra-contrib!
+  sinatra-contrib
   thin
