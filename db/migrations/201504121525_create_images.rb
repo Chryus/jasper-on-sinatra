@@ -3,6 +3,7 @@ Sequel.migration do
     create_table :images do
       primary_key :id, type: Integer
       String :title, text: true, null: false, unique: true
+      String :url, text: true, null: false, unique: true
       DateTime :created_at, null: false
     end
     run "alter table images alter column created_at set default current_timestamp"
