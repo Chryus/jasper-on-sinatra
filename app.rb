@@ -2,13 +2,6 @@ require 'sinatra'
 
 require_relative "routes/images"
 
-JASPER = [
-  { title: 'background-image', url: '/images/0.jpg'},
-  { title: 'boxes', url: '/images/1.jpg' },
-  { title: 'mint', url: '/images/2.jpg' },
-  { title: 'sun', url: '/images/3.jpg' }
-]
-
 module JasperOnSinatra
   class App < Sinatra::Application
     set :title, "Jasper on Sinatra"
