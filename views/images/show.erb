@@ -1,4 +1,3 @@
 <h1>Image: <%=@image[:title] %></h1>
 <p><img src="<%=@image[:url] %>"></img></p>
-<% binding.pry %>
-<p><a href="/images/<%=@index%>/download">Download Image</a></p>
+<p><a href="/images/<%=@image[:id].to_i%>/download">Download Image</a></p>

@@ -33,7 +33,6 @@ end
 
 namespace :g do
   task :migration, :fname do |t, args|
-    binding.pry
     args.with_defaults(fname: "new_migration")
     Dir.chdir("db/migrations") do
       timestamp = Time.now.strftime("%Y%m%d%H%M")

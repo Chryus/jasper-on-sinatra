@@ -9,7 +9,7 @@ module JasperOnSinatra
     use Routes::Images
 
     before do
-      @background_image = JASPER.map { |hash| hash[:url] if hash[:title] == 'background-image' }.compact.first
+      #@background_image = JASPER.map { |hash| hash[:url] if hash[:title] == 'background-image' }.compact.first
       @user = 'Chris'
       @weight = session[:weight]
       @environment = settings.environment
@@ -30,29 +30,6 @@ module JasperOnSinatra
       pdf = Prawn::Document.new
       pdf.text 'Jasper is a sweet sweet soul'
       pdf.render
-    end
-
-    # get '/images' do
-    #   @images = JASPER
-    #   erb :images, layout: true
-    # end
-
-    get '/images/:index/download' do |index|
-      @image = JASPER[index.to_i]
-
-      attachment @image[:title]
-      send_file 'images/#{index}.jpg' 
-    end
-
-    get '/images/:index.?:format?' do |index, format|
-      @index = index.to_i
-      @image = JASPER[@index]
-      if format == 'jpg'
-        content_type :jpg
-        send_file 'images/#{@index}.jpg'
-      else
-        erb :'/images/show', layout: true
-      end
     end
 
     get '/sessions/new' do
