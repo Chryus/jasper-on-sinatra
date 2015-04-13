@@ -9,8 +9,9 @@ module JasperOnSinatra
 
       namespace '/images' do
         get do # matches '/images'
+          binding.pry
           @images = Image.all
-          erb ":/images/index", layout: true
+          erb :"/images/index", layout: true
         end
 
         get "/:id" do |id|

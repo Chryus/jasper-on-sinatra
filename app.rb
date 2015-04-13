@@ -32,10 +32,10 @@ module JasperOnSinatra
       pdf.render
     end
 
-    get '/images' do
-      @images = JASPER
-      erb :images, layout: true
-    end
+    # get '/images' do
+    #   @images = JASPER
+    #   erb :images, layout: true
+    # end
 
     get '/images/:index/download' do |index|
       @image = JASPER[index.to_i]
