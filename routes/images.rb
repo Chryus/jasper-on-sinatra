@@ -15,7 +15,7 @@ module JasperOnSinatra
 
         get "/:id" do |id|
           @image = Image[id.to_i]
-          erb :"images/show", layout: true
+          erb :"/images/show", layout: true
         end
 
         get "/:id/download" do |id|

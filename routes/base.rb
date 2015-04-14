@@ -27,7 +27,7 @@ module JasperOnSinatra
       # end
 
       set :root, File.realpath("..", __dir__)
-      set :public_folder, File.realpath("../assets", __dir__)
+      set :public_folder, File.realpath("../public", __dir__)
 
       set :assets_precompile, %w(app.css *.jpg)
       set :assets_prefix, %w(assets)
@@ -42,8 +42,8 @@ module JasperOnSinatra
 
       assets do
         serve "/js", from: "js"
-        serve "/css", from: "assets/stylesheets"
         serve "/bower_components", from: "bower_components"
+
 
         js :modernizr, [
           "/bower_components/modernizr/modernizr.js",

@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My App</title>
-  <link rel="stylesheet" href="assets/stylesheets/app.css"/>
+  <link rel="stylesheet" href="/stylesheets/app.css"/>
 </head>
 
 <body>
@@ -14,7 +14,7 @@
   <nav class="top-bar" data-topbar role="navigation">
   <ul class="title-area">
     <li class="name">
-      <h1><a href="#">Jasper's fashion show</a></h1>
+      <h1><a href="#">Jasper on Sinatra</a></h1>
     </li>
      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -39,17 +39,12 @@
     </ul>
   </section>
 </nav>
-  <!-- <h1 style="color: #9900CC">Welcome to Jasper's fashion show</h1>
+<section class="main">
+  <div class="large-12 columns">
+    <h3 class="docs header" style="color: #AF1515">Welcome to Jasper's fashion show</h3>
 
-  <div data-magellan-expedition="fixed">
-    <ul class="sub-nav">
-      <li data-magellan-arrival="build"><a href='/'>Home</a></li>
-      <li data-magellan-arrival="js"><a href="#js">Arrival 2</a></li>
-      <li   <p><a href='/images'>Portfolio</a></p>
 
-    </ul>
-  </div>
-    <p><a href='/'>Home</a></p> -->
+
     
     <% if @message %>
       <h1><%= @message %></h1>
@@ -60,6 +55,8 @@
       <p> Last guess for Jasper's weight: <%= @weight %> lbs </p>
     <% end %>
   <%= yield %>
+  </div>
+</section>
 
 </body>
 </html>
