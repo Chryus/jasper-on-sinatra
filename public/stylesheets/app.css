@@ -9157,3 +9157,7 @@ th.hide-for-touch {
     display: table-cell !important;
   }
 }
+/* line 3, ../../scss/_custom.scss */
+.docs.header {
+  color: #AF1515;
+}
