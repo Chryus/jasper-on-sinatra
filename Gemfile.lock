@@ -190,6 +190,7 @@ GEM
       rack-test
       sinatra (~> 1.4.0)
       tilt (~> 1.3)
+    sinatra-security (0.2.1)
     slop (3.6.0)
     sprockets (2.12.3)
       hike (~> 1.2)
@@ -207,6 +208,8 @@ GEM
       rack (~> 1.0)
     tilt (1.4.1)
     ttfunk (1.4.0)
+    warden (1.2.3)
+      rack (>= 1.0)
 
 PLATFORMS
   ruby
@@ -226,4 +229,6 @@ DEPENDENCIES
   sinatra-asset-pipeline
   sinatra-assetpack
   sinatra-contrib
+  sinatra-security (~> 0.2.1)
   thin
+  warden (~> 1.2.3)

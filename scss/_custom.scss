@@ -1,5 +1,21 @@
 $jasperred : #AF1515;
+$jaspergrey : #F0F0F0;
 
 .docs.header {
   color: $jasperred;
+  background-color: none;
+  position: relative;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0px;
 }
+
+.bar-section {
+  background-color: $jaspergrey;
+}
+
+body {
+  background-image: url("/images/0.jpg");
+  background-position-y: 92px;
+}
+

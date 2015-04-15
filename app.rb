@@ -9,8 +9,6 @@ module JasperOnSinatra
     use Routes::Images
 
     before do
-      #@background_image = JASPER.map { |hash| hash[:url] if hash[:title] == 'background-image' }.compact.first
-      @user = 'Chris'
       @weight = session[:weight]
       @environment = settings.environment
     end

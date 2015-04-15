@@ -13,6 +13,8 @@ gem "sequel"
 gem "fog"
 gem  "sbfaulkner-sinatra-prawn"
 gem "rack-flash3"
+gem 'sinatra-security', '~> 0.2.1'
+gem 'warden', '~> 1.2.3'
 
 group :development do
   gem 'pry-byebug'

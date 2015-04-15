@@ -9157,7 +9157,23 @@ th.hide-for-touch {
     display: table-cell !important;
   }
 }
-/* line 3, ../../scss/_custom.scss */
+/* line 4, ../../scss/_custom.scss */
 .docs.header {
   color: #AF1515;
+  background-color: none;
+  position: relative;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0px;
+}
+
+/* line 13, ../../scss/_custom.scss */
+.bar-section {
+  background-color: #F0F0F0;
+}
+
+/* line 17, ../../scss/_custom.scss */
+body {
+  background-image: url("/images/0.jpg");
+  background-position-y: 92px;
 }
