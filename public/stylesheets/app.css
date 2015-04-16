@@ -9168,7 +9168,7 @@ th.hide-for-touch {
 }
 
 /* line 13, ../../scss/_custom.scss */
-.bar-section {
+.bar-section.nav {
   background-color: #F0F0F0;
 }
 
