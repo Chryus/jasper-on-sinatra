@@ -1,13 +1,17 @@
 require 'sinatra'
 require 'warden'
 
+require_relative "routes/users"
 require_relative "routes/images"
+require_relative "routes/logins"
 
 module JasperOnSinatra
   class App < Sinatra::Application
     set :title, "Jasper on Sinatra"
 
     use Routes::Images
+    use Routes::Logins
+    use Routes::Users
 
     before do
       @weight = session[:weight]
