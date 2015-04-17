@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'warden'
 
 require_relative "routes/images"
 

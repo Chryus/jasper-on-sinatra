@@ -21,10 +21,10 @@ module JasperOnSinatra
         enable :static, :logging, :sessions
       end
 
-      # before do
-      #   pass if %w[login logout].include? request.path_info.split("/")[1]
-      #   redirect "/login" unless env["warden"].authenticated?
-      # end
+      before do
+        pass if %w[login logout].include? request.path_info.split("/")[1]
+        redirect "/login" unless env["warden"].authenticated?
+      end
 
       set :root, File.realpath("..", __dir__)
       set :public_folder, File.realpath("../public", __dir__)

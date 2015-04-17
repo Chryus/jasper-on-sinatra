@@ -3,7 +3,7 @@ require "./app"
 app = Rack::Builder.new do
 
   use Warden::Manager do |config|
-    config.default_startegies :password
+    config.default_strategies :password
 
     config.serialize_into_session{ |user| user.id }
 
