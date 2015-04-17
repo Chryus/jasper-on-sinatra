@@ -3,6 +3,10 @@ require_relative "base"
 module Encoder
   module Routes
     class Users < Base
+      get '/users' do
+        erb :'users/index', locals: { users = User.all, new_user = User.new }
+      end
+
       post '/users' do
         user = User.new(params[:user])
 
