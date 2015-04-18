@@ -1,6 +1,6 @@
 require_relative "base"
 
-module Encoder
+module JasperOnSinatra
   module Routes
     class Users < Base
       get '/users' do
