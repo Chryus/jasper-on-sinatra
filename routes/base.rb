@@ -38,7 +38,7 @@ module JasperOnSinatra
 
       set :erb, format: :html5
 
-      helpers Sinatra::ContentFor
+      helpers Sinatra::ContentFor, NamedRoutes
 
       assets do
         serve "/js", from: "js"
