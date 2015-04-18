@@ -1,0 +1,26 @@
+<div class="row-fluid">
+  <div class="span6 vo-panel">
+    <form action="<%= new_session_path %>" method="post">
+      <fieldset>
+        <legend>Restricted</legend>
+        <label for="username">
+          Username
+          <input autofocus="<%= true %>" name="user[username]" required="<%= true %>" type="text"></input>
+        </label>
+        <label for="password">
+          Password
+          <input autofocus="<%= true %>" name="user[passoword]" required="<%= true %>" type="password"></input>
+        </label>
+      </fieldset>
+      <button class="btn btn-primary vo-login-button">Log In</botton>
+    </form>
+  </div>
+</div>
+
+<% content_for :js do %>
+  <script type='text/javascript'>
+
+    $('#logout-link').hide();
+
+  </script>
+<% end %>
